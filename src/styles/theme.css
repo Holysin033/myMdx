@@ -1,0 +1,101 @@
+/* 主题变量：切换只改 <html data-theme>，不重新渲染任何组件 */
+:root {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --bg-elevated: #f6f7f9;
+  --bg-inset: #f0f1f4;
+  --bg-hover: #eaecef;
+
+  --fg: #1f2328;
+  --fg-muted: #59636e;
+  --fg-faint: #8b949e;
+
+  --border: #d8dee4;
+  --border-strong: #b6bfc9;
+
+  --accent: #0969da;
+  --accent-fg: #ffffff;
+
+  --code-bg: #f6f7f9;
+
+  --font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei',
+    'PingFang SC', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, 'Courier New', monospace;
+
+  --radius: 6px;
+  --dur: 140ms;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0d1117;
+  --bg-elevated: #161b22;
+  --bg-inset: #1c2129;
+  --bg-hover: #222831;
+
+  --fg: #e6edf3;
+  --fg-muted: #9aa7b2;
+  --fg-faint: #6e7a86;
+
+  --border: #2a323c;
+  --border-strong: #3d4754;
+
+  --accent: #4c9aff;
+  --accent-fg: #0d1117;
+
+  --code-bg: #161b22;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  /* 这是个固定视口的应用：滚动只发生在编辑器和预览内部，页面本身永不滚 */
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-ui);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  /* 主题切换时背景平滑，但不拖慢交互 */
+  transition: background-color var(--dur), color var(--dur);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color var(--dur), border-color var(--dur);
+}
+
+button:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-strong);
+}
+
+button:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

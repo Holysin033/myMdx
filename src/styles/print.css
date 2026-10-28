@@ -1,0 +1,73 @@
+/*
+ * 打印 = 导出 PDF。
+ *
+ * 不引 jsPDF/html2canvas：浏览器自己的分页与字体渲染永远比前端截图方案好，
+ * 而且用户还能在打印对话框里选「另存为 PDF」。这里只负责把界面外壳收起来，
+ * 让纸面上只剩正文。
+ */
+
+@page {
+  margin: 16mm 14mm;
+}
+
+@media print {
+  html,
+  body,
+  #app,
+  .app {
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* 编辑器、工具栏、状态栏、Inspector 都不该出现在纸上 */
+  .toolbar,
+  .statusbar,
+  .inspector,
+  .pane:first-child,
+  .pane-head,
+  .splitter {
+    display: none !important;
+  }
+
+  .panes {
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  .pane {
+    border: none !important;
+  }
+
+  .preview {
+    overflow: visible !important;
+    height: auto !important;
+    padding: 0 !important;
+  }
+
+  .md-body {
+    max-width: none;
+    font-size: 11.5pt;
+  }
+
+  /* 表格和代码块不跨页断开，宁可留白 */
+  .md-body pre,
+  .md-body table,
+  .md-body img,
+  .md-body blockquote,
+  .md-body .md-container {
+    break-inside: avoid;
+  }
+
+  .md-body h1,
+  .md-body h2,
+  .md-body h3 {
+    break-after: avoid;
+  }
+
+  /* 打印时链接后面补上真实地址，纸面才有意义 */
+  .md-body a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.85em;
+    color: var(--fg-faint);
+  }
+}

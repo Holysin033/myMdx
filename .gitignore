@@ -1,0 +1,8 @@
+node_modules
+dist
+.npm-cache
+.DS_Store
+*.local
+
+# 演示录制的中间帧（成品 docs/demo.gif 要提交）
+docs/frames/

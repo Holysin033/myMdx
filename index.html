@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>myMdx — Markdown 编辑器</title>
+    <script>
+      // 防闪白：首帧前定主题，不能等到 Vue 挂载
+      ;(function () {
+        try {
+          var t = localStorage.getItem('mymdx:theme') || 'auto'
+          var dark =
+            t === 'dark' ||
+            (t === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+          document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+        } catch (e) {
+          document.documentElement.dataset.theme = 'light'
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
